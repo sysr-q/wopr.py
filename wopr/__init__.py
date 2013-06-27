@@ -47,7 +47,7 @@ class WOPRHandler(TelnetHandler):
     # ---- PHASE 0 ----
     @command(["000001", "falkens-maze", "armageddon"])
     def terminate(self, params=None):
-        if self._phase != LOGON:
+        if self._phase != Phases.LOGON:
             return
 
         self.swrite(junk.CONNECTION_TERMINATED)
@@ -55,7 +55,7 @@ class WOPRHandler(TelnetHandler):
 
     @command("help")
     def help(self, params):
-        if self._phase != LOGON:
+        if self._phase != Phases.LOGON:
             return
 
         if len(params) == 0:
