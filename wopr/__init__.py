@@ -45,9 +45,10 @@ class WOPRHandler(TelnetHandler):
         self.RUNSHELL = False
 
     # ---- PHASE 0 ----
-    @command(["000001", "falkens-maze", "armageddon"])
+    @command(["000001", "falkens-maze", "Falkens-Maze", "armageddon"])
     def terminate(self, params=None):
-        if self._phase != Phases.LOGON:
+        if self._phase != Phases.LOGON and self._phase != Phases.GAMES:
+            print self._phase, params, self.history[-1]
             return
 
         self.swrite(junk.CONNECTION_TERMINATED)
@@ -73,15 +74,15 @@ class WOPRHandler(TelnetHandler):
         if len(params) == 0:
             return self.terminate()
         if params[0].lower() == "games":
-            self._phase = Phases.JOSHUA
             return self.swrite(junk.LIST_GAMES)
 
     # ---- PHASE 2 ----
     @command("joshua")
     def joshua(self, params):
-        if self._phase != Phases.JOSHUA:
+        if self._phase not in (Phases.LOGON, Phases.GAMES):
             return
 
+        self._phase = Phases.JOSHUA
         self.PROMPT = ""
         self.swrite(junk.JOSHUA_LOGON_GARBAGE, character=0.002)
         self.swrite(junk.JOSHUA_HELLO)
@@ -94,15 +95,15 @@ class WOPRHandler(TelnetHandler):
         if self._phase != Phases.JOSHUA:
             return
 
-        if self.history[-1].lower() == "hello.":
+        if self.history[-1].split()[0].lower() == "hello.":
             self.swrite(junk.JOSHUA_HOW_ARE_YOU)
-        elif self.history[-1].lower() == "im":
+        elif self.history[-1].split()[0].lower() == "im":
             self.swrite(junk.JOSHUA_EXCELLENT)
-        elif self.history[-1].lower() == "people":
+        elif self.history[-1].split()[0].lower() == "people":
             self.swrite(junk.JOSHUA_YES_THEY_DO)
-        elif self.history[-1].lower() == "love":
+        elif self.history[-1].split()[0].lower() == "love":
             self.swrite(junk.JOSHUA_WOULDNT_YOU)
-        elif self.history[-1].lower() == "later.":
+        elif self.history[-1].split()[0].lower() == "later.":
             self._phase = Phases.GLOBAL
             self.swrite(junk.JOSHUA_FINE)
 

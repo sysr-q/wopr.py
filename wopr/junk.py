@@ -8,24 +8,28 @@ CONNECTION = (
     (" "*35 + "\n") * 3
 )
 
-# Phase 0
+#########
+# PHASE 0
+#########
+
 CONNECTION_TERMINATED = (
     "IDENTIFICATION NOT RECOGNISED BY SYSTEM\n"
     "--CONNECTION TERMINATED--"
 )
 
-# Phase 0
 HELP_LOGON = (
     "HELP NOT AVAILABLE"
 )
 
-# Phase 1
+#########
+# PHASE 1
+#########
+
 HELP_GAMES = (
     "'GAMES' REFERS TO MODELS, SIMULATIONS AND GAMES\n"
     "WHICH HAVE TACTICAL AND STRATEGIC APPLICATIONS."
 )
 
-# Phase 1
 LIST_GAMES = (
     "FALKEN'S MAZE\n"
     "BLACK JACK\n"
@@ -45,8 +49,10 @@ LIST_GAMES = (
     "GLOBAL THERMONUCLEAR WAR"
 )
 
-# Phase 2
-__n_50 = "\n" * 50
+#########
+# PHASE 2
+#########
+
 JOSHUA_LOGON_GARBAGE = (
     "#45 11456 11009 11893 11972 11315\n"
     "PRT CON. 3.4.5. SECTRAN 9.4.3. PORT STAT: SD-345\n"
@@ -95,4 +101,12 @@ JOSHUA_WOULDNT_YOU = (
 JOSHUA_FINE = (
     "\n"
     "FINE\n"
+)
+
+#########
+# PHASE 3
+#########
+
+GLOBAL_MAP = (
+    # UHHHHHHHHHHHHh
 )
